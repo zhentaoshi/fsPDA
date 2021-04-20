@@ -1,7 +1,7 @@
 library(reshape2)
 library(xlsx)
 
-setwd("~/FS_2019aug/code_JY/simulation/super code/sparse/result")
+setwd("~/simulation/sparse")
 
 t_list = c(100, 200, 400)
 n_list = c(50, 100, 200)

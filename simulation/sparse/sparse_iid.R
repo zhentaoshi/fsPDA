@@ -1,5 +1,5 @@
 rm(list=ls())
-setwd("~/FS_2019aug/code_JY/simulation/super code/sparse")
+setwd("~/simulation/sparse")
 
 source("main_function.R")
 
