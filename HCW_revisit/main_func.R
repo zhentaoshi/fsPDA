@@ -84,4 +84,4 @@ wp = wp + theme_bw()
 wp = wp + theme(legend.title = element_blank())
 
 print(wp)
-ggsave(file = "~/boosting_hcw/draft/hcw_r2.png", plot = wp, width = 10, height = 5.5)
+ggsave(file = "hcw_r2.png", plot = wp, width = 10, height = 5.5)
