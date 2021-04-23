@@ -19,3 +19,9 @@ Under the folder `simulation`:
 
 - Folder `nonsparse` includes codes for simulation of non-sparse DGP, in which running `Run.simulation.dense.R` gives the simulation results. 
 - Folder `sparse` includes codes for simulation of sparse DGP, in which running `sparse_iid.R`, `sparse_inid.R` and `sparse_nnd.R` gives the simulation results. 
+
+---
+
+Under the folder `HCW_revist`:
+
+* `main.R` replicates the empirical example of Hsiao, Ching and Wan (2012) as in the online supplement of the paper.

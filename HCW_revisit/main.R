@@ -9,7 +9,8 @@ source("lasso_ic.R")
 source("random_draw.R")
 
 # date cleaning
-main = as.data.frame(read.table("hcw-data.txt", header = F))
+main = as.data.frame(read.table("hcw-data.txt", header = F)) # load data
+
 index = c("Hong Kong","Australia","Austria","Canada","Denmark",
           "Finland","France","Germany","Italy","Japan","Korea","Mexico",
           "Netherlands","New Zealand","Norway","Switzerland", "United Kingdom",
