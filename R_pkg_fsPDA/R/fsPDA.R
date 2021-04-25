@@ -1,27 +1,59 @@
+#' Function implementing forward-selected panel data approach in Zhentao Shi and Jingyi Huang (2021)
+#'
+#' @param treated Numeric. A T-dimensional time series vector of treated units.
+#' @param control Numeric. A T x N panel matrix with each column being a control unit.
+#' @param treatment_start An integer specifying the period treatment starts. Should set to lie between $T/2$ and $T$ to ensure enough pre-treatment observations.
+#' @param date Date or numeric. A $T$-dimensional vector of date class or any meaningful numerical sequence. By default, if set to be `NULL`, `1:length(treated)` is used.
+#' @param lrvar_lag A non-negative integer specifying the maximum lag with Bartlett kernel for the Newey-West long-run variance estimator. By default, if set to be `NULL`, `floor((length(treated)-treatment_start+1)^(1/4))` is used. Cannot set to be larger than `floor(sqrt(length(treated)-treatment_start+1))`.
+#' @param plot Logical. Should a `ggplot` object be included in the return list and printed? If set to be `TRUE`, `ggplot2` package is needed as dependency.
+#'
+#' @return A list contains
+#' \item{select}{A list containing feature selection results, where `dim` is the number of selected units, `control` is the vector indicates the selected units, `coef` contains the coefficient estimates, and `RSquared` is the in-sample $R^2$.}
+#' \item{in_sample}{A data frame with in-sample fitted values.}
+#' \item{out_of_sample}{A data frame with out-of-sample counterfactual predicts and treatment effect estimates.}
+#' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE), its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
+#' \item{plot}{A `ggplot` object. Some post-plot arguments of `ggplot` can be added additionally, for example, `labs`.}
+#'
+#' @examples
+#' library(fsPDA)
+#' data("testData")
+#'
+#' treated = testData$treated
+#' control = testData$control
+#' intervention_time = testData$intervention_time
+#' result=fsPDA(treated, control,
+#'             treatment_start = which(names(treated) == intervention_time),
+#'             date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
+#' print(result$plot+labs(x="Year",y="Monthly Growth Rate"))
+#'
+#' @export
+#'
+#'
+
 fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRUE) {
-  
-  
+
+
   # check inputs
-  
+
   if(is.matrix(control)) {
     N=ncol(control)
   } else {
     stop("control should be a matrix")
   }
-  
+
   if(length(treated)==nrow(control)) {
     Tn=length(treated)
   } else {
     stop("lengths of treated and control units should be the same")
   }
-  
+
   if(treatment_start==floor(treatment_start) & treatment_start>0.5*Tn & treatment_start<=Tn) {
     T1=treatment_start-1
     T2=Tn-T1
   } else {
     stop("treatment_start should be an integer no larger than the total sample size with enough pre-treatment periods")
   }
-  
+
   if(is.null(date)) {
     date=1:Tn
   } else {
@@ -29,7 +61,7 @@ fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRU
       stop("date should be of the same length with the total sample size")
     }
   }
-  
+
   if(is.null(lrvar_lag)) {
     lrvar_lag=floor(T2^(1/4))
   } else {
@@ -37,16 +69,16 @@ fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRU
       stop("lrvar_lag should be a non-negative integer no larger than sqrt of post-treated sample size")
     }
   }
-  
-  
+
+
   # sample splitting
-  
+
   y1=treated[1:T1];y2=treated[(T1+1):Tn]
   Y1=control[1:T1,,drop=FALSE];Y2=control[(T1+1):Tn,,drop=FALSE]
-  
-  
+
+
   # forward iteration
-  
+
   var.resid=function(j,Y_select) {
     X=cbind(1,Y_select,Y1[,j])
     XX=t(X)%*%X
@@ -57,7 +89,7 @@ fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRU
     sigma2_hat=mean(e_hat^2)
     return(sigma2_hat)
   }
-  
+
   B=log(log(N))*log(T1)/T1
   IC=log(var(y1))
   select=NULL;R=0
@@ -75,31 +107,31 @@ fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRU
       break
     }
   }
-  
-  
+
+
   # post-selection estimation
-  
+
   X=cbind(1,Y1[,select,drop=FALSE])
   XX=t(X)%*%X
   XX_inv=try(solve(XX),silent=TRUE)
   if ("try-error" %in% class(XX_inv)) {XX_inv=MASS::ginv(XX)}
   b_hat=as.vector(XX_inv%*%t(X)%*%y1)
-  
+
   beta_hat=rep(0,N);beta_hat[select]=b_hat[-1]
   beta_hat=c(b_hat[1],beta_hat)
   y1_hat=as.vector(X%*%b_hat)
   RSquared=var(y1_hat)/var(y1)
-  
-  
+
+
   # counterfactual and treatment effect
-  
+
   y2_0=as.vector(cbind(1,Y2[,select,drop=FALSE])%*%b_hat)
   d_hat=y2-y2_0
   ATE=mean(d_hat)
-  
-  
+
+
   # test of ATE with Newey-West lrvar (Bartlett kernel)
-  
+
   if(lrvar_lag>0) {
     gamma_d=as.vector(acf(d_hat,lag.max=lrvar_lag,type="covariance",plot=FALSE)$acf)
     w=1-(1:lrvar_lag)/(lrvar_lag+1)
@@ -107,51 +139,51 @@ fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRU
   } else {
     lrvar_d=var(d_hat)
   }
-  
+
   Z=ATE/sqrt(lrvar_d/T2)
   p_value=2*(1-pnorm(abs(Z)))
-  
-  
+
+
   # plot and output
-  
+
   if(!is.null(colnames(control))) {
     names(beta_hat)=c("intercept",colnames(control))
     select=colnames(control)[select]
   }
-  
+
   if(plot) {
-    
+
     suppressMessages(library(ggplot2))
-    
+
     ggdata=rbind(data.frame(date=date,value=treated,type="observation"),
                  data.frame(date=date[1:(T1+1)],value=c(y1_hat,y2_0[1]),type="in-sample fit"),
                  data.frame(date=date[(T1+1):Tn],value=y2_0,type="counterfactual"))
     ggdata$type=factor(ggdata$type,levels=c("observation","in-sample fit","counterfactual"))
-    
+
     plot=ggplot(ggdata,aes(x=date,y=value,color=type,linetype=type))+
       geom_vline(xintercept=date[T1+1])+
       geom_line()+scale_linetype_manual(values=c("solid","dashed", "dashed"))+
       geom_point()+
       theme_bw()+theme(legend.title=element_blank(),legend.position="bottom")+
       labs(x=NULL,y=NULL)
-    
+
     print(plot)
     return(list(select=list(dim=R,control=select,coef=beta_hat,RSquared=RSquared),
                 in_sample=data.frame(date=date[1:T1],observation=y1,fit=y1_hat),
                 out_of_sample=data.frame(date=date[(T1+1):Tn],observation=y2,counterfactual=y2_0,treatment=d_hat),
                 ATE=c(ATE=ATE,lrVar=lrvar_d,t_stat=Z,p_value=p_value),
                 plot=plot))
-    
+
   } else {
-    
+
     return(list(select=list(dim=R,control=select,coef=beta_hat,RSquared=RSquared),
                 in_sample=data.frame(date=date[1:T1],observation=y1,fit=y1_hat),
                 out_of_sample=data.frame(date=date[(T1+1):Tn],observation=y2,counterfactual=y2_0,treatment=d_hat),
                 ATE=c(ATE=ATE,lrVar=lrvar_d,t_stat=Z,p_value=p_value)))
-    
+
   }
-  
-  
+
+
 }
 
 
