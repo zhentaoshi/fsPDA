@@ -8,3 +8,5 @@ Description: The forward-selection PDA of of Zhentao Shi and Jingyi Huang (2019)
 License: MIT
 Encoding: UTF-8
 LazyData: true
+Depends: 
+    R (>= 2.10)

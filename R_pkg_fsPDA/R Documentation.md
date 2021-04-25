@@ -4,6 +4,12 @@
 
 Function implementing forward-selected panel data approach in Zhentao Shi and Jingyi Huang (2021). 
 
+#### Installation
+
+```R
+devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")
+```
+
 #### Usage
 
 ```R
@@ -44,11 +50,16 @@ https://github.com/zhentaoshi/fsPDA
 #### Examples
 
 ```R
-load("testData.Rda")
+library(fsPDA)
+data("testData")
 
-result=fsPDA(treated,control,
-             treatment_start=which(names(treated)==intervention_time),
-             date=as.Date(paste(substr(names(treated),1,4),"-",substr(names(treated),5,6),"-01",sep="")))
+treated = testData$treated
+control = testData$control
+intervention_time = testData$intervention_time
+
+result=fsPDA(treated, control,
+             treatment_start = which(names(treated) == intervention_time),
+             date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
 
 print(result$plot+labs(x="Year",y="Monthly Growth Rate"))
 ```
