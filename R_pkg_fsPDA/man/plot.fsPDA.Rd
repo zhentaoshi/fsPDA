@@ -14,7 +14,7 @@
 )
 }
 \arguments{
-\item{x}{An object of class `fsPDA`.}
+\item{x}{An object of class the `fsPDA`.}
 
 \item{tlab}{The label of the time (horizontal) axis.}
 
@@ -34,18 +34,17 @@ Plot method for objects of class `fsPDA`.
 }
 \examples{
 library(fsPDA)
-library(ggplot2)
 
-data("testData")
+data("china_import")
 
-treated = testData$treated
-control = testData$control
-intervention_time = testData$intervention_time
+treated <- testData$treated
+control <- testData$control
+intervention_time <- testData$intervention_time
 
-result=fsPDA(treated, control,
-            treatment_start = which(names(treated) == intervention_time),
-            date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
+result <- fsPDA(treated, control,
+  treatment_start = which(names(treated) == intervention_time),
+  date = as.Date(paste(substr(names(treated), 1, 4), "-", substr(names(treated), 5, 6), "-01", sep = ""))
+)
 
 plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
-
 }

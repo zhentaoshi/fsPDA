@@ -27,7 +27,7 @@
 #'
 #' @examples
 #' library(fsPDA)
-#' data("testData")
+#' data("china_import")
 #'
 #' treated <- testData$treated
 #' control <- testData$control

@@ -40,20 +40,20 @@ Function implementing forward-selected panel data approach in Shi and Huang (202
 }
 \examples{
 library(fsPDA)
-data("testData")
+data("china_import")
 
-treated = testData$treated
-control = testData$control
-intervention_time = testData$intervention_time
+treated <- testData$treated
+control <- testData$control
+intervention_time <- testData$intervention_time
 
-result=fsPDA(treated, control,
-            treatment_start = which(names(treated) == intervention_time),
-            date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
+result <- fsPDA(treated, control,
+  treatment_start = which(names(treated) == intervention_time),
+  date = as.Date(paste(substr(names(treated), 1, 4), "-", substr(names(treated), 5, 6), "-01", sep = ""))
+)
 
 print(result)
-
 }
 \references{
-Zhentao Shi and Jingyi Huang (2001): "Forward-Selected Panel Data Approach for Program Evaluation,"
-  Journal of Econometrics, arXiv: 1908.05894
+Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
+  forthcoming at the Journal of Econometrics, arXiv: 1908.05894
 }
