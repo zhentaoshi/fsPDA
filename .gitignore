@@ -1,3 +1,4 @@
+
 ## LyX
 *.lyx~
 *.lyx#
@@ -135,3 +136,4 @@ sympy-plots-for-*.tex/
 # xindy
 *.xdy
 .Rproj.user
+fsPDA.Rcheck/*
