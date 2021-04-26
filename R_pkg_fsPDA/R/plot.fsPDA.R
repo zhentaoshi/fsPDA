@@ -8,7 +8,10 @@
 #' @param legend.position The position of legends ("none", "left", "right", "bottom", "top")
 #'
 #' @note
-#' `ggplot2` package is needed as dependency.
+#' `ggplot2` package needs to be installed as dependency.
+#'
+#' @seealso
+#' [fsPDA] for examples. 
 #'
 #' @examples
 #' library(fsPDA)
