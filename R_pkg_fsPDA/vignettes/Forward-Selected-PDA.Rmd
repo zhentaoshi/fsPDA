@@ -1,10 +1,30 @@
 ---
 title: "Forward-Selected Panel Data Approach"
-output: rmarkdown::html_vignette
+author: "Zhentao Shi and Yishu Wang"
+date: \today
+output:
+  rmarkdown::pdf_document: default
+  '# rmarkdown::html_vignette': default
 vignette: >
   %\VignetteIndexEntry{Forward-Selected Panel Data Approach}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+description: nothing
+geometry: margin=1in
+bibliography: REFERENCES.bib
+biblio-style: apalike
+link-citations: yes
+fontsize: 12pt
+urlcolor: blue
+header-includes:
+- \usepackage{graphics}
+- \usepackage{pgfplots}
+- \usepackage{caption}
+- \usepackage{setspace}
+- \singlespacing
+---  
+  
+  
 ---
 
 ```{r, include = FALSE}
@@ -22,17 +42,17 @@ library(fsPDA)
 
 #### Description
 
-Function implementing forward-selected panel data approach in Zhentao Shi and Jingyi Huang (2021). 
+Function implementing forward-selected panel data approach in @shi2019forward.
 
 #### Installation
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")
 ```
 
 #### Usage
 
-```{r, echo =FALSE}
+```{r, eval=FALSE}
 library(fsPDA)
 data("testData")
 
@@ -66,19 +86,12 @@ result=fsPDA(treated, control,
 | `ATE`           | A numeric vector containing estimate of average treatment effect (ATE), its long-run variance, t-statistic, and p-value to test if ATE is statistically 0. |
 | `plot`          | A `ggplot` object. Some post-plot arguments of `ggplot` can be added additionally, for example, `labs`. |
 
-#### Author(s)
-
-Jingyi Huang, Zhan Gao, Zhentao Shi, Yishu Wang
-
-#### References
-
-Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach" forthcoming at the *Journal of Econometrics*, [arXiv: 1908.05894](https://arxiv.org/abs/1908.05894)
 
 https://github.com/zhentaoshi/fsPDA
 
 #### Examples
 
-```{r, echo=FALSE}
+```{r, eval=FALSE}
 library(fsPDA)
 library(ggplot2)
 
@@ -94,3 +107,6 @@ result=fsPDA(treated, control,
 
 # print(result$plot+labs(x="Year",y="Monthly Growth Rate"))
 ```
+
+
+## References
