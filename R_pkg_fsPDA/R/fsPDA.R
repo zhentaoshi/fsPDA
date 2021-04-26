@@ -5,9 +5,8 @@
 #' @param treatment_start An integer specifying the period treatment starts. Should set to lie between $T/2$ and $T$ to ensure enough pre-treatment observations.
 #' @param date Date or numeric. A $T$-dimensional vector of date class or any meaningful numerical sequence. By default, if set to be `NULL`, `1:length(treated)` is used.
 #' @param lrvar_lag A non-negative integer specifying the maximum lag with Bartlett kernel for the Newey-West long-run variance estimator. By default, if set to be `NULL`, `floor((length(treated)-treatment_start+1)^(1/4))` is used. Cannot set to be larger than `floor(sqrt(length(treated)-treatment_start+1))`.
-#' @param plot Logical. Should a `ggplot` object be included in the return list and printed? If set to be `TRUE`, `ggplot2` package is needed as dependency.
 #'
-#' @return A list contains
+#' @return A list is returned of class `fsPDA` containing: 
 #' \item{select}{A list containing feature selection results, where `dim` is the number of selected units, `control` is the vector indicates the selected units, `coef` contains the coefficient estimates, and `RSquared` is the in-sample $R^2$.}
 #' \item{in_sample}{A data frame with in-sample fitted values.}
 #' \item{out_of_sample}{A data frame with out-of-sample counterfactual predicts and treatment effect estimates.}
@@ -21,16 +20,17 @@
 #' treated = testData$treated
 #' control = testData$control
 #' intervention_time = testData$intervention_time
+#' 
 #' result=fsPDA(treated, control,
 #'             treatment_start = which(names(treated) == intervention_time),
 #'             date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
-#' print(result$plot+labs(x="Year",y="Monthly Growth Rate"))
 #'
 #' @export
 #'
 #'
 
-fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRUE) {
+
+fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL) {
 
 
   # check inputs
@@ -144,46 +144,21 @@ fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL,plot=TRU
   p_value=2*(1-pnorm(abs(Z)))
 
 
-  # plot and output
+  # output
 
   if(!is.null(colnames(control))) {
     names(beta_hat)=c("intercept",colnames(control))
     select=colnames(control)[select]
   }
-
-  if(plot) {
-
-    suppressMessages(library(ggplot2))
-
-    ggdata=rbind(data.frame(date=date,value=treated,type="observation"),
-                 data.frame(date=date[1:(T1+1)],value=c(y1_hat,y2_0[1]),type="in-sample fit"),
-                 data.frame(date=date[(T1+1):Tn],value=y2_0,type="counterfactual"))
-    ggdata$type=factor(ggdata$type,levels=c("observation","in-sample fit","counterfactual"))
-
-    plot=ggplot(ggdata,aes(x=date,y=value,color=type,linetype=type))+
-      geom_vline(xintercept=date[T1+1])+
-      geom_line()+scale_linetype_manual(values=c("solid","dashed", "dashed"))+
-      geom_point()+
-      theme_bw()+theme(legend.title=element_blank(),legend.position="bottom")+
-      labs(x=NULL,y=NULL)
-
-    print(plot)
-    return(list(select=list(dim=R,control=select,coef=beta_hat,RSquared=RSquared),
-                in_sample=data.frame(date=date[1:T1],observation=y1,fit=y1_hat),
-                out_of_sample=data.frame(date=date[(T1+1):Tn],observation=y2,counterfactual=y2_0,treatment=d_hat),
-                ATE=c(ATE=ATE,lrVar=lrvar_d,t_stat=Z,p_value=p_value),
-                plot=plot))
-
-  } else {
-
-    return(list(select=list(dim=R,control=select,coef=beta_hat,RSquared=RSquared),
-                in_sample=data.frame(date=date[1:T1],observation=y1,fit=y1_hat),
-                out_of_sample=data.frame(date=date[(T1+1):Tn],observation=y2,counterfactual=y2_0,treatment=d_hat),
-                ATE=c(ATE=ATE,lrVar=lrvar_d,t_stat=Z,p_value=p_value)))
-
-  }
-
-
+  
+  result=list(select=list(dim=R,control=select,coef=beta_hat,RSquared=RSquared),
+              in_sample=data.frame(date=date[1:T1],observation=y1,fit=y1_hat),
+              out_of_sample=data.frame(date=date[(T1+1):Tn],observation=y2,counterfactual=y2_0,treatment=d_hat),
+              ATE=c(ATE=ATE,lrVar=lrvar_d,t_stat=Z,p_value=p_value))
+  class(result)="fsPDA"
+  
+  
+  return(result)
 }
 
 
