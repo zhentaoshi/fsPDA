@@ -22,7 +22,7 @@ header-includes:
 - \usepackage{caption}
 - \usepackage{setspace}
 - \singlespacing
-​---  
+---  
   
   
 ---
