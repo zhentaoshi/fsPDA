@@ -1,17 +1,31 @@
 Package: fsPDA
 Type: Package
-Title: Forward-selection PDA implementation
+Title: Forward-selection Panel Data Program Evaluation
 Version: 0.1.0
-Author: Jingyi Huang and Zhentao Shi
-Maintainer: Jingyi Huang <jyhuang@link.cuhk.edu.hk>
-Description: The forward-selection PDA of of Zhentao Shi and Jingyi Huang (2019): "Forward-Selected Panel Data Approach" arXiv: 1908.05894
+Authors@R: c(
+    person("Zhentao", "Shi", role = c("aut", "cre"), email = "shizhentao@gmail.com" ) 
+	person("Yishu", "Wang", role = c("aut"), 
+	email = "wangy@link.cuhk.edu.hk "),
+	person("Zhan", "Gao", role = c("aut"), 
+	email = "gaozhan.cuhk@gmail.com "),
+	)
+Maintainer: Zhentao Shi <shizhentao@gmail.com>
+Description: The forward-selection PDA of of Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach" arXiv: 1908.05894
 License: MIT
 Encoding: UTF-8
 LazyData: true
+
 Depends: 
     R (>= 2.10)
 RoxygenNote: 7.1.1
+
+Imports: 
+    ggplot2
+
 Suggests: 
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+
+
+
