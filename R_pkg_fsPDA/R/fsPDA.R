@@ -1,16 +1,28 @@
-#' Function implementing forward-selected panel data approach in Zhentao Shi and Jingyi Huang (2021)
+#' Forward-selected panel data approach
+#' 
+#' Function implementing forward-selected panel data approach in Shi and Huang (2021)
 #'
-#' @param treated Numeric. A T-dimensional time series vector of treated units.
-#' @param control Numeric. A T x N panel matrix with each column being a control unit.
-#' @param treatment_start An integer specifying the period treatment starts. Should set to lie between $T/2$ and $T$ to ensure enough pre-treatment observations.
-#' @param date Date or numeric. A $T$-dimensional vector of date class or any meaningful numerical sequence. By default, if set to be `NULL`, `1:length(treated)` is used.
-#' @param lrvar_lag A non-negative integer specifying the maximum lag with Bartlett kernel for the Newey-West long-run variance estimator. By default, if set to be `NULL`, `floor((length(treated)-treatment_start+1)^(1/4))` is used. Cannot set to be larger than `floor(sqrt(length(treated)-treatment_start+1))`.
+#' @param treated Numeric. A T-by-1 vector of time series of the treated units.
+#' @param control Numeric. A T-by-N matrix. Each column is the times series of a control unit.
+#' @param treatment_start An integer specifying the period treatment starts. 
+#'   We suggest setting it between $T/2$ and $T$ to ensure enough pre-treatment observations.
+#' @param date Date or numeric. A $T$-dimensional vector of date class or any meaningful numerical sequence. 
+#'   The default option `NULL` means `1:length(treated)` is used.
+#' @param lrvar_lag A non-negative integer specifying the maximum lag with Bartlett kernel 
+#'   for the Newey-West long-run variance estimator. 
+#'   The default option `NULL` means `floor((length(treated)-treatment_start+1)^(1/4))` is used. 
+#'   It cannot be larger than `floor(sqrt(length(treated)-treatment_start+1))`.
 #'
-#' @return A list is returned of class `fsPDA` containing: 
-#' \item{select}{A list containing feature selection results, where `dim` is the number of selected units, `control` is the vector indicates the selected units, `coef` contains the coefficient estimates, and `RSquared` is the in-sample $R^2$.}
+#' @return A list is returned of the class `fsPDA`. It contains the following components:
+#' \item{select}{A list containing the selected control units, 
+#'   where `dim` is the number of selected units, 
+#'   `control` is the vector indicates the selected units, 
+#'   `coef` contains the coefficient estimates, 
+#'   and `RSquared` is the in-sample $R^2$.}
 #' \item{in_sample}{A data frame with in-sample fitted values.}
 #' \item{out_of_sample}{A data frame with out-of-sample counterfactual predicts and treatment effect estimates.}
-#' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE), its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
+#' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE), 
+#'   its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
 #' \item{plot}{A `ggplot` object. Some post-plot arguments of `ggplot` can be added additionally, for example, `labs`.}
 #'
 #' @examples
@@ -26,8 +38,12 @@
 #'             date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
 #'
 #' @export
+#' 
 #'
-#'
+#' @references 
+#' Zhentao Shi and Jingyi Huang (2001): "Forward-Selected Panel Data Approach for Program Evaluation," 
+#'   Journal of Econometrics, arXiv: 1908.05894
+#' 
 
 
 fsPDA=function(treated,control,treatment_start,date=NULL,lrvar_lag=NULL) {
