@@ -1,6 +1,6 @@
 #' Forward-selected panel data approach
 #'
-#' Function implementing forward-selected panel data approach in Shi and Huang (2021)
+#' Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021)
 #'
 #' @param treated Numeric. A T-by-1 vector of time series of the treated units.
 #' @param control Numeric. A T-by-N matrix. Each column is the times series of a control unit.
@@ -33,7 +33,7 @@
 #' control <- testData$control
 #' intervention_time <- testData$intervention_time
 #'
-#' result <- fsPDA(treated, control,
+#' result <- est.fsPDA(treated, control,
 #'   treatment_start = which(names(treated) == intervention_time),
 #'   date = as.Date(paste(substr(names(treated), 1, 4), "-", substr(names(treated), 5, 6), "-01", sep = ""))
 #' )
@@ -48,7 +48,7 @@
 #'
 
 
-fsPDA <- function(treated, control, treatment_start, date = NULL, lrvar_lag = NULL) {
+est.fsPDA <- function(treated, control, treatment_start, date = NULL, lrvar_lag = NULL) {
 
 
   # check inputs
