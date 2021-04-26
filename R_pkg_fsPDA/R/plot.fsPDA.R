@@ -11,25 +11,9 @@
 #' `ggplot2` package needs to be installed as dependency.
 #'
 #' @seealso
-#' [fsPDA] for examples. 
+#' [est.fsPDA] for examples. 
 #'
-#' @examples
-#' library(fsPDA)
-#'
-#' data("china_import")
-#'
-#' treated <- testData$treated
-#' control <- testData$control
-#' intervention_time <- testData$intervention_time
-#'
-#' result <- est.fsPDA(treated, control,
-#'   treatment_start = which(names(treated) == intervention_time),
-#'   date = as.Date(paste(substr(names(treated), 1, 4), "-", substr(names(treated), 5, 6), "-01", sep = ""))
-#' )
-#'
-#' plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
 #' @export
-#'
 #'
 
 
