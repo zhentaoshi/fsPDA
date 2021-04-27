@@ -1,33 +1,23 @@
-#' Plot method for objects of class `fsPDA`.
+#' Plot Counterfactual Prediction
 #'
-#' @param x An object of class the `fsPDA`.
+#' Plot method for objects of class "fsPDA".
+#'
+#' @param x An object of class the "fsPDA".
 #' @param tlab The label of the time (horizontal) axis.
 #' @param ylab The label of the value (vertical) axis.
 #' @param title The text for the title.
 #' @param point Logical. Should a layer of points be included in the plot?
-#' @param legend.position The position of legends ("none", "left", "right", "bottom", "top")
+#' @param legend.position The position of legends ("none", "left", "right", "bottom", "top").
 #'
 #' @note
-#' `ggplot2` package is needed as dependency.
+#' "ggplot2" package needs to be installed as dependency.
 #'
-#' @examples
-#' library(fsPDA)
-#'
-#' data("china_import")
-#'
-#' treated <- china_import$treated
-#' control <- china_import$control
-#' intervention_time <- china_import$intervention_time
-#'
-#' result <- est.fsPDA(treated, control,
-#'   treatment_start = which(names(treated) == intervention_time),
-#'   date = as.Date(paste(substr(names(treated), 1, 4), "-", substr(names(treated), 5, 6), "-01", sep = ""))
-#' )
-#'
-#' plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
+#' @seealso
+#' [est.fsPDA()] for examples.
+#' 
 #' @export
 #'
-#'
+
 
 
 plot.fsPDA <- function(x, tlab = NULL, ylab = NULL, title = NULL, point = TRUE, legend.position = "bottom") {
