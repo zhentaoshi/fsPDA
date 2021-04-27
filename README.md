@@ -35,8 +35,6 @@ Under the folder `simulation`:
 
 ## R Package
 
-The folder`R_pkg_fsPDA` contains the meta files of an R package. 
+The folder`R_pkg_fsPDA` contains an R package. 
 
 To install the package,run `devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")`.
-
-The folder `R_pkg_fsPDA\R` contains a documented function *fsPDA*. It reports the identity of the selected units, the treatment effects over time, and the t-statistic for the average treatment effect.
