@@ -37,6 +37,27 @@ A list is returned of the class "fsPDA". It contains the following components:
 \description{
 Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021).
 }
+\examples{
+library(fsPDA)
+
+# Example of China Import
+data("china_import")
+date_import <- names(china_import$treated)
+result <- est.fsPDA(treated = china_import$treated, control = china_import$control,
+                    treatment_start = which(date_import == china_import$intervention_time),
+                    date = as.Date(paste(substr(date_import,1,4), "-", substr(date_import, 5, 6), "-01", sep="")))
+print(result)
+plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
+
+# Example of HCW
+data("HCW")
+result <- est.fsPDA(treated = HCW$panel[,1], control = HCW$panel[,-1],
+                    treatment_start = HCW$T1+1,
+                    date = as.Date(paste(substr(HCW$quarter, 1, 4), "-", (as.numeric(substr(HCW$quarter, 6, 6))-1)*3+1, "-1", sep="")))
+print(result)
+plot(result, tlab = "Year", ylab = "Real GDP Growth Rate")
+
+}
 \references{
 Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
   forthcoming at the Journal of Econometrics, arXiv: 1908.05894

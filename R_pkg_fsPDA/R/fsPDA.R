@@ -28,6 +28,9 @@ NULL
 #'  \item\strong{Release:} {United Nations}
 #'  \item\strong{Frequency:} {Monthly}
 #'  \item\strong{Date Range:} {2010 -- 2015}
+#'  \item\code{treated} {A vector of treated unit with names as month of format "yyyymm".}
+#'  \item\code{control} {A matrix of control units with rownames as "yyyymm".}
+#'  \item\code{intervention_time} {Character. The month treatment intervention started, formated in "yyyymm".}
 #' }
 #'
 #' @source United Nations Comtrade Database \url{https://comtrade.un.org/}
@@ -59,9 +62,9 @@ NULL
 #'
 #' @format
 #' \itemize{
-#'   \item\strong{panel} {A matrix of real GDP growth rate of many countries.}
-#'   \item\strong{quarter} {Character. A time sequence related to `panel` labeled by year and quarter.}
-#'   \item\strong{T1} {An Integer indicates the length of pre-treated period.}
+#'   \item\code{panel} {A matrix of real GDP growth rate of many countries.}
+#'   \item\code{quarter} {Character. A time sequence related to \code{panel} labeled by year and quarter.}
+#'   \item\code{T1} {An Integer indicates the length of pre-treated period.}
 #'}
 #'
 #' @references

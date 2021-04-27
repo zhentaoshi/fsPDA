@@ -34,7 +34,7 @@
 #' library(fsPDA)
 #' 
 #' # Example of China Import
-#' data("china_import)
+#' data("china_import")
 #' date_import <- names(china_import$treated)
 #' result <- est.fsPDA(treated = china_import$treated, control = china_import$control,
 #'                     treatment_start = which(date_import == china_import$intervention_time),
@@ -48,7 +48,7 @@
 #'                     treatment_start = HCW$T1+1,
 #'                     date = as.Date(paste(substr(HCW$quarter, 1, 4), "-", (as.numeric(substr(HCW$quarter, 6, 6))-1)*3+1, "-1", sep="")))
 #' print(result)
-#' plot(fs_HCW, tlab = "Year", ylab = "Real GDP Growth Rate")
+#' plot(result, tlab = "Year", ylab = "Real GDP Growth Rate")
 #'
 
 

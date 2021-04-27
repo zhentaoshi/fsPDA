@@ -6,9 +6,9 @@
 \title{HCW Data}
 \format{
 \itemize{
-  \item\strong{panel} {A matrix of real GDP growth rate of many countries.}
-  \item\strong{quarter} {Character. A time sequence related to `panel` labeled by year and quarter.}
-  \item\strong{T1} {An Integer indicates the length of pre-treated period.}
+  \item\code{panel} {A matrix of real GDP growth rate of many countries.}
+  \item\code{quarter} {Character. A time sequence related to \code{panel} labeled by year and quarter.}
+  \item\code{T1} {An Integer indicates the length of pre-treated period.}
 }
 }
 \usage{

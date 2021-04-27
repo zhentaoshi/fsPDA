@@ -9,6 +9,9 @@
  \item\strong{Release:} {United Nations}
  \item\strong{Frequency:} {Monthly}
  \item\strong{Date Range:} {2010 -- 2015}
+ \item\code{treated} {A vector of treated unit with names as month of format "yyyymm".}
+ \item\code{control} {A matrix of control units with rownames as "yyyymm".}
+ \item\code{intervention_time} {Character. The month treatment intervention started, formated in "yyyymm".}
 }
 }
 \source{
