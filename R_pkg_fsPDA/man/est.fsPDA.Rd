@@ -42,9 +42,9 @@ Estimation and inference by the forward-selected panel data approach in Shi and 
 library(fsPDA)
 data("china_import")
 
-treated <- testData$treated
-control <- testData$control
-intervention_time <- testData$intervention_time
+treated <- china_import$treated
+control <- china_import$control
+intervention_time <- china_import$intervention_time
 
 result <- est.fsPDA(treated, control,
   treatment_start = which(names(treated) == intervention_time),
