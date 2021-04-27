@@ -33,7 +33,13 @@ NULL
 #'
 #'
 #' @source United Nations Comtrade Database \url{https://comtrade.un.org/}
+#' This database provides detailed statistics for international commodity trade, and China's monthly import data is unavailable after September of 2012. 
+#' To make our data consistent, we sum the export value of other countries to China and take it as import value before and after September of 2012.
 #'
+#' The treated variable is “watches with case of, or clad with, precious metal”, the control variables are other 88 catrgories.
+#' 7 categories commonly consumed as bribe goods or conspicuous consumption are excluded.
+#' There are 35 pre-treatment observations ranging from February 2010 to December 2012, and 36 post-treatment observations spanning from January 2013 to December 2015
+#' 
 #' @references
 #'
 #' Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
