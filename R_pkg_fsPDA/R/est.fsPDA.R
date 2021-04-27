@@ -24,6 +24,12 @@
 #' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE),
 #'   its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
 #'
+#' @export
+#'
+#' @references
+#' Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
+#'   forthcoming at the Journal of Econometrics, arXiv: 1908.05894
+#'
 #' @examples
 #' library(fsPDA)
 #' 
@@ -43,12 +49,6 @@
 #'                     date = as.Date(paste(substr(HCW$quarter, 1, 4), "-", (as.numeric(substr(HCW$quarter, 6, 6))-1)*3+1, "-1", sep="")))
 #' print(result)
 #' plot(fs_HCW, tlab = "Year", ylab = "Real GDP Growth Rate")
-#' 
-#' @export
-#'
-#' @references
-#' Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
-#'   forthcoming at the Journal of Econometrics, arXiv: 1908.05894
 #'
 
 

@@ -33,5 +33,5 @@ Plot method for objects of class "fsPDA".
 "ggplot2" package needs to be installed as dependency.
 }
 \seealso{
-[est.fsPDA()] for examples.
+\link{est.fsPDA} for examples.
 }

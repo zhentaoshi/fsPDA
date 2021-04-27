@@ -13,11 +13,9 @@
 }
 \usage{
 data(HCW)
-
-This is the real GDP growth rate data used in Hsiao, Ching, and Wan (2012).
 }
 \description{
-HCW Data
+This is the real GDP growth rate data used in Hsiao, Ching, and Wan (2012).
 }
 \references{
 Hsiao, C., S. H. Ching, and S. K. Wan (2012):

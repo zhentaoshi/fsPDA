@@ -3,7 +3,7 @@
 \docType{data}
 \name{china_import}
 \alias{china_import}
-\title{Chinese import data}
+\title{Chinese Import Data}
 \format{
 \itemize{
  \item\strong{Release:} {United Nations}
@@ -24,13 +24,8 @@ There are 35 pre-treatment observations ranging from February 2010 to December 2
 data(china_import)
 }
 \description{
-Chinese import data
-}
-\section{Description}{
-
 This dataset is described in Section 5 of Shi and Huang (2021).
 }
-
 \references{
 Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
   forthcoming at the Journal of Econometrics, arXiv: 1908.05894

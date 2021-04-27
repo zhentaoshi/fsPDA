@@ -1,6 +1,6 @@
-#' fsPDA: Package for the forward-selected panel data approach
+#' fsPDA: Package for the Forward-selected Panel Data Approach
 #'
-#' Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021)
+#' Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021).
 #'
 #' \code{est.fsPDA} is the main function. It generates a \code{fsPDA} object which can work with
 #' the generic methods \code{plot}.
@@ -17,7 +17,9 @@ NULL
 
 
 
-#' Chinese import data
+#' Chinese Import Data
+#'
+#' This dataset is described in Section 5 of Shi and Huang (2021).
 #'
 #' @usage data(china_import)
 #'
@@ -27,10 +29,6 @@ NULL
 #'  \item\strong{Frequency:} {Monthly}
 #'  \item\strong{Date Range:} {2010 -- 2015}
 #' }
-#'
-#' @section Description:
-#' This dataset is described in Section 5 of Shi and Huang (2021).
-#'
 #'
 #' @source United Nations Comtrade Database \url{https://comtrade.un.org/}
 #' This database provides detailed statistics for international commodity trade, and China's monthly import data is unavailable after September of 2012. 
@@ -55,11 +53,9 @@ NULL
 
 #' HCW Data
 #'
-#' @usage data(HCW)
-#'
 #' This is the real GDP growth rate data used in Hsiao, Ching, and Wan (2012).
 #'
-
+#' @usage data(HCW)
 #'
 #' @format
 #' \itemize{

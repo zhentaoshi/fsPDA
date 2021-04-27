@@ -3,9 +3,9 @@
 \docType{package}
 \name{fsPDA}
 \alias{fsPDA}
-\title{fsPDA: Package for the forward-selected panel data approach}
+\title{fsPDA: Package for the Forward-selected Panel Data Approach}
 \description{
-Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021)
+Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021).
 }
 \details{
 \code{est.fsPDA} is the main function. It generates a \code{fsPDA} object which can work with
