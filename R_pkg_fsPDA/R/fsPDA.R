@@ -24,8 +24,8 @@ NULL
 #' @format
 #' \itemize{
 #'  \item\strong{Release:} {United Nations}
-#'  \item\strong{Frequency:} {Annual}
-#'  \item\strong{Date Range:} {20xx -- 20xx}
+#'  \item\strong{Frequency:} {Monthly}
+#'  \item\strong{Date Range:} {2010 -- 2015}
 #' }
 #'
 #' @section Description:
