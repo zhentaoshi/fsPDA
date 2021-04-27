@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.fsPDA.R
 \name{plot.fsPDA}
 \alias{plot.fsPDA}
-\title{Plot method for objects of class `fsPDA`.}
+\title{Plot Counterfactual Prediction}
 \usage{
 \method{plot}{fsPDA}(
   x,
@@ -14,7 +14,7 @@
 )
 }
 \arguments{
-\item{x}{An object of class the `fsPDA`.}
+\item{x}{An object of class the "fsPDA".}
 
 \item{tlab}{The label of the time (horizontal) axis.}
 
@@ -24,27 +24,14 @@
 
 \item{point}{Logical. Should a layer of points be included in the plot?}
 
-\item{legend.position}{The position of legends ("none", "left", "right", "bottom", "top")}
+\item{legend.position}{The position of legends ("none", "left", "right", "bottom", "top").}
 }
 \description{
-Plot method for objects of class `fsPDA`.
+Plot method for objects of class "fsPDA".
 }
 \note{
-`ggplot2` package is needed as dependency.
+"ggplot2" package needs to be installed as dependency.
 }
-\examples{
-library(fsPDA)
-
-data("china_import")
-
-treated <- china_import$treated
-control <- china_import$control
-intervention_time <- china_import$intervention_time
-
-result <- est.fsPDA(treated, control,
-  treatment_start = which(names(treated) == intervention_time),
-  date = as.Date(paste(substr(names(treated), 1, 4), "-", substr(names(treated), 5, 6), "-01", sep = ""))
-)
-
-plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
+\seealso{
+[est.fsPDA()] for examples.
 }

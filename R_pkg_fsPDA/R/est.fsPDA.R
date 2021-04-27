@@ -5,25 +5,24 @@
 #' @param treated Numeric. A T-by-1 vector of time series of the treated units.
 #' @param control Numeric. A T-by-N matrix. Each column is the times series of a control unit.
 #' @param treatment_start An integer specifying the period treatment starts.
-#'   We suggest setting it between $T/2$ and $T$ to ensure enough pre-treatment observations.
-#' @param date Date or numeric. A $T$-dimensional vector of date class or any meaningful numerical sequence.
-#'   The default option `NULL` means `1:length(treated)` is used.
+#'   We suggest setting it between T/2 and T to ensure enough pre-treatment observations.
+#' @param date Date or numeric. A T-by-1 vector of date class or any meaningful numerical sequence.
+#'   The default option \code{NULL} means \code{1:length(treated)} is used.
 #' @param lrvar_lag A non-negative integer specifying the maximum lag with Bartlett kernel
 #'   for the Newey-West long-run variance estimator.
-#'   The default option `NULL` means `floor((length(treated)-treatment_start+1)^(1/4))` is used.
-#'   It cannot be larger than `floor(sqrt(length(treated)-treatment_start+1))`.
+#'   The default option \code{NULL} means \code{floor((length(treated)-treatment_start+1)^(1/4))} is used.
+#'   It cannot be larger than \code{floor(sqrt(length(treated)-treatment_start+1))}.
 #'
-#' @return A list is returned of the class `fsPDA`. It contains the following components:
+#' @return A list is returned of the class "fsPDA". It contains the following components:
 #' \item{select}{A list containing the selected control units,
-#'   where `dim` is the number of selected units,
-#'   `control` is the vector indicates the selected units,
-#'   `coef` contains the coefficient estimates,
-#'   and `RSquared` is the in-sample $R^2$.}
+#'   where \code{dim} is the number of selected units,
+#'   \code{control} is the vector indicates the selected units,
+#'   \code{coef} contains the coefficient estimates,
+#'   and \code{RSquared} is the in-sample R-Squared.}
 #' \item{in_sample}{A data frame with in-sample fitted values.}
 #' \item{out_of_sample}{A data frame with out-of-sample counterfactual predicts and treatment effect estimates.}
 #' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE),
 #'   its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
-#' \item{plot}{A `ggplot` object. Some post-plot arguments of `ggplot` can be added additionally, for example, `labs`.}
 #'
 #' @examples
 #' library(fsPDA)

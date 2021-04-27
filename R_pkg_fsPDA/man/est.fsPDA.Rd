@@ -2,7 +2,7 @@
 % Please edit documentation in R/est.fsPDA.R
 \name{est.fsPDA}
 \alias{est.fsPDA}
-\title{Forward-selected panel data approach}
+\title{Forward-selected Panel Data Approach}
 \usage{
 est.fsPDA(treated, control, treatment_start, date = NULL, lrvar_lag = NULL)
 }
@@ -12,46 +12,30 @@ est.fsPDA(treated, control, treatment_start, date = NULL, lrvar_lag = NULL)
 \item{control}{Numeric. A T-by-N matrix. Each column is the times series of a control unit.}
 
 \item{treatment_start}{An integer specifying the period treatment starts.
-We suggest setting it between $T/2$ and $T$ to ensure enough pre-treatment observations.}
+We suggest setting it between T/2 and T to ensure enough pre-treatment observations.}
 
-\item{date}{Date or numeric. A $T$-dimensional vector of date class or any meaningful numerical sequence.
-The default option `NULL` means `1:length(treated)` is used.}
+\item{date}{Date or numeric. A T-by-1 vector of date class or any meaningful numerical sequence.
+The default option \code{NULL} means \code{1:length(treated)} is used.}
 
 \item{lrvar_lag}{A non-negative integer specifying the maximum lag with Bartlett kernel
 for the Newey-West long-run variance estimator.
-The default option `NULL` means `floor((length(treated)-treatment_start+1)^(1/4))` is used.
-It cannot be larger than `floor(sqrt(length(treated)-treatment_start+1))`.}
+The default option \code{NULL} means \code{floor((length(treated)-treatment_start+1)^(1/4))} is used.
+It cannot be larger than \code{floor(sqrt(length(treated)-treatment_start+1))}.}
 }
 \value{
-A list is returned of the class `fsPDA`. It contains the following components:
+A list is returned of the class "fsPDA". It contains the following components:
 \item{select}{A list containing the selected control units,
-  where `dim` is the number of selected units,
-  `control` is the vector indicates the selected units,
-  `coef` contains the coefficient estimates,
-  and `RSquared` is the in-sample $R^2$.}
+  where \code{dim} is the number of selected units,
+  \code{control} is the vector indicates the selected units,
+  \code{coef} contains the coefficient estimates,
+  and \code{RSquared} is the in-sample R-Squared.}
 \item{in_sample}{A data frame with in-sample fitted values.}
 \item{out_of_sample}{A data frame with out-of-sample counterfactual predicts and treatment effect estimates.}
 \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE),
   its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
-\item{plot}{A `ggplot` object. Some post-plot arguments of `ggplot` can be added additionally, for example, `labs`.}
 }
 \description{
-Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021)
-}
-\examples{
-library(fsPDA)
-data("china_import")
-
-treated <- china_import$treated
-control <- china_import$control
-intervention_time <- china_import$intervention_time
-
-result <- est.fsPDA(treated, control,
-  treatment_start = which(names(treated) == intervention_time),
-  date = as.Date(paste(substr(names(treated), 1, 4), "-", substr(names(treated), 5, 6), "-01", sep = ""))
-)
-
-print(result)
+Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021).
 }
 \references{
 Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
