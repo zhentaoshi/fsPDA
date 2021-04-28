@@ -1,7 +1,7 @@
 Package: fsPDA
 Type: Package
 Title: Forward-selection Panel Data Program Evaluation
-Version: 0.1.0
+Version: 0.9.0
 Authors@R: c(
     person("Zhentao", "Shi",  role = c("aut", "cre"), email = "shizhentao@gmail.com" ), 
 	person("Jingyi", "Huang", role = c("aut"), email = "huangjy0912@gmail.com"),

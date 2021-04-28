@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.fsPDA.R
 \name{plot.fsPDA}
 \alias{plot.fsPDA}
-\title{Plot Counterfactual Prediction}
+\title{Plot Raw Data, Fitting and Counterfactual Prediction}
 \usage{
 \method{plot}{fsPDA}(
   x,
@@ -14,7 +14,7 @@
 )
 }
 \arguments{
-\item{x}{An object of class the "fsPDA".}
+\item{x}{An object of the "fsPDA" class.}
 
 \item{tlab}{The label of the time (horizontal) axis.}
 
@@ -28,9 +28,12 @@
 }
 \description{
 Plot method for objects of class "fsPDA".
+It draws the observed time series of the treated unit in a red solid line.
+It uses the fsPDA method to fit the pre-treatment sample (represented by a green dash line),
+and then to predict the counterfactual after the treatment data (represented by a blue dash line).
 }
 \note{
-"ggplot2" package needs to be installed as dependency.
+"ggplot2" package must be installed as dependency.
 }
 \seealso{
 \link{est.fsPDA} for examples.

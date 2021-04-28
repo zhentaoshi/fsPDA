@@ -1,8 +1,12 @@
-#' Plot Counterfactual Prediction
+#' Plot Raw Data, Fitting and Counterfactual Prediction
 #'
 #' Plot method for objects of class "fsPDA".
+#' It draws the observed time series of the treated unit in a red solid line.
+#' It uses the fsPDA method to fit the pre-treatment sample (represented by a green dash line),
+#' and then to predict the counterfactual after the treatment data (represented by a blue dash line).
 #'
-#' @param x An object of class the "fsPDA".
+#'
+#' @param x An object of the "fsPDA" class.
 #' @param tlab The label of the time (horizontal) axis.
 #' @param ylab The label of the value (vertical) axis.
 #' @param title The text for the title.
@@ -10,11 +14,11 @@
 #' @param legend.position The position of legends ("none", "left", "right", "bottom", "top").
 #'
 #' @note
-#' "ggplot2" package needs to be installed as dependency.
+#' "ggplot2" package must be installed as dependency.
 #'
 #' @seealso
 #' \link{est.fsPDA} for examples.
-#' 
+#'
 #' @export
 #'
 

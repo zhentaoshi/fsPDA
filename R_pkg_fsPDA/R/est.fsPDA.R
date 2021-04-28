@@ -1,26 +1,26 @@
 #' Forward-selected Panel Data Approach
 #'
-#' Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021).
+#' Estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
 #'
-#' @param treated Numeric. A T-by-1 vector of time series of the treated units.
-#' @param control Numeric. A T-by-N matrix. Each column is the times series of a control unit.
+#' @param treated Numeric. T-dimensional vector of time series of the treated units.
+#' @param control Numeric. T-by-N matrix. Each column is the times series of a control unit.
 #' @param treatment_start An integer specifying the period treatment starts.
-#'   We suggest setting it between T/2 and T to ensure enough pre-treatment observations.
 #' @param date Date or numeric. A T-by-1 vector of date class or any meaningful numerical sequence.
 #'   The default option \code{NULL} means \code{1:length(treated)} is used.
 #' @param lrvar_lag A non-negative integer specifying the maximum lag with Bartlett kernel
 #'   for the Newey-West long-run variance estimator.
-#'   The default option \code{NULL} means \code{floor((length(treated)-treatment_start+1)^(1/4))} is used.
-#'   It cannot be larger than \code{floor(sqrt(length(treated)-treatment_start+1))}.
+#'   The default option \code{NULL} specifies \code{floor((length(treated)-treatment_start+1)^(1/4))}.
+#'   The admissible maximum is \code{floor(sqrt(length(treated)-treatment_start+1))}.
 #'
-#' @return A list is returned of the class "fsPDA". It contains the following components:
+#' @return A list of the class "fsPDA" is returned. It contains the following components:
 #' \item{select}{A list containing the selected control units,
 #'   where \code{dim} is the number of selected units,
 #'   \code{control} is the vector indicates the selected units,
 #'   \code{coef} contains the coefficient estimates,
 #'   and \code{RSquared} is the in-sample R-Squared.}
-#' \item{in_sample}{A data frame with in-sample fitted values.}
-#' \item{out_of_sample}{A data frame with out-of-sample counterfactual predicts and treatment effect estimates.}
+#' \item{in_sample}{A data frame with the in-sample fitted values.}
+#' \item{out_of_sample}{A data frame with the out-of-sample counterfactual predicts,  and the estimated treatment effect
+#' (realization - counterfactual).}
 #' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE),
 #'   its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
 #'
@@ -32,8 +32,8 @@
 #'
 #' @examples
 #' library(fsPDA)
-#' 
-#' # Example of China Import
+#'
+#' # Example of China luxury watch import
 #' data("china_import")
 #' date_import <- names(china_import$treated)
 #' result <- est.fsPDA(treated = china_import$treated, control = china_import$control,
@@ -41,7 +41,7 @@
 #'                     date = as.Date(paste(substr(date_import,1,4), "-", substr(date_import, 5, 6), "-01", sep="")))
 #' print(result)
 #' plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
-#' 
+#'
 #' # Example of HCW
 #' data("HCW")
 #' result <- est.fsPDA(treated = HCW$panel[,1], control = HCW$panel[,-1],

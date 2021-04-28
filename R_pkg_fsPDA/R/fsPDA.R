@@ -1,9 +1,9 @@
-#' fsPDA: Package for the Forward-selected Panel Data Approach
+#' fsPDA: Package for the Forward-Selected Panel Data Approach
 #'
-#' Estimation and inference by the forward-selected panel data approach in Shi and Huang (2021).
+#' Estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
 #'
 #' \code{est.fsPDA} is the main function. It generates a \code{fsPDA} object which can work with
-#' the generic methods \code{plot}.
+#' the generic method \code{plot}.
 #'
 #' @references
 #' Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
@@ -25,22 +25,24 @@ NULL
 #'
 #' @format
 #' \itemize{
-#'  \item\strong{Release:} {United Nations}
 #'  \item\strong{Frequency:} {Monthly}
-#'  \item\strong{Date Range:} {2010 -- 2015}
-#'  \item\code{treated} {A vector of treated unit with names as month of format "yyyymm".}
-#'  \item\code{control} {A matrix of control units with rownames as "yyyymm".}
-#'  \item\code{intervention_time} {Character. The month treatment intervention started, formated in "yyyymm".}
+#'  \item\strong{Date Range:} {2010:Feb -- 2015:Dec}
+#'  \item\code{treated} {Time series of luxury watch import, under the official category
+#'  name "watches with case of, or clad with, precious metal". Names in the format "yyyymm".}
+#'  \item\code{control} {A matrix of commodities as the control units. The rowname is "yyyymm", and the column name
+#'  is the identity of the commodity.}
+#'  \item\code{intervention_time} {Character. The month when the treatment intervention started, formated in "yyyymm".}
 #' }
 #'
-#' @source United Nations Comtrade Database \url{https://comtrade.un.org/}
-#' This database provides detailed statistics for international commodity trade, and China's monthly import data is unavailable after September of 2012. 
-#' To make our data consistent, we sum the export value of other countries to China and take it as import value before and after September of 2012.
+#' @source United Nations Comtrade Database (\url{https://comtrade.un.org/}).
+#' This database provides detailed statistics for international commodity trade.
 #'
-#' The treated variable is “watches with case of, or clad with, precious metal”, the control variables are other 88 catrgories.
-#' 7 categories commonly consumed as bribe goods or conspicuous consumption are excluded.
-#' There are 35 pre-treatment observations ranging from February 2010 to December 2012, and 36 post-treatment observations spanning from January 2013 to December 2015
-#' 
+#' Pre-treatment: 2010:Feb -- 2012:Dec (35 months). Post-treatment: 2013:Jan -- 2015:Dec (36 observations).
+#'
+#' China's monthly import data are unavailable after September of 2012.
+#' To make our data consistent,
+#' we sum the export value of other countries to China and take it as import value before and after September of 2012.
+#'
 #' @references
 #'
 #' Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach for Program Evaluation,"
