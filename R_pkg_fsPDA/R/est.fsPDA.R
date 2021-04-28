@@ -2,12 +2,12 @@
 #'
 #' Estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
 #'
-#' @param treated Numeric. T-dimensional vector of time series of the treated units.
+#' @param treated Numeric. T-dimensional vector of time series of the treated unit.
 #' @param control Numeric. T-by-N matrix. Each column is the times series of a control unit.
 #' @param treatment_start An integer specifying the period treatment starts.
 #' @param date Date or numeric. A T-by-1 vector of date class or any meaningful numerical sequence.
 #'   The default option \code{NULL} means \code{1:length(treated)} is used.
-#' @param lrvar_lag A non-negative integer specifying the maximum lag with Bartlett kernel
+#' @param lrvar_lag A non-negative integer specifying the maximum lag with the Bartlett kernel
 #'   for the Newey-West long-run variance estimator.
 #'   The default option \code{NULL} specifies \code{floor((length(treated)-treatment_start+1)^(1/4))}.
 #'   The admissible maximum is \code{floor(sqrt(length(treated)-treatment_start+1))}.

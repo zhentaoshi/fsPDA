@@ -7,7 +7,7 @@
 est.fsPDA(treated, control, treatment_start, date = NULL, lrvar_lag = NULL)
 }
 \arguments{
-\item{treated}{Numeric. T-dimensional vector of time series of the treated units.}
+\item{treated}{Numeric. T-dimensional vector of time series of the treated unit.}
 
 \item{control}{Numeric. T-by-N matrix. Each column is the times series of a control unit.}
 
