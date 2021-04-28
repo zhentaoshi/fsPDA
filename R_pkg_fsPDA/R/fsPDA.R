@@ -64,10 +64,15 @@ NULL
 #'
 #' @format
 #' \itemize{
-#'   \item\code{panel} {A matrix of real GDP growth rate of many countries.}
+#'   \item\code{panel} {A matrix of real GDP growth rate of many countries. The column names are the countries and territories.
+#'   The first column is Hong Kong.}
 #'   \item\code{quarter} {Character. A time sequence related to \code{panel} labeled by year and quarter.}
 #'   \item\code{T1} {An Integer indicates the length of pre-treated period.}
 #'}
+#'
+#' @source
+#' The data archive of the original paper (\url{http://qed.econ.queensu.ca/jae/2012-v27.5/hsiao-ching-wan/}).
+#'
 #'
 #' @references
 #' Hsiao, C., S. H. Ching, and S. K. Wan (2012):

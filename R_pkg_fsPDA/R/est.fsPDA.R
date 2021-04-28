@@ -20,7 +20,7 @@
 #'   and \code{RSquared} is the in-sample R-Squared.}
 #' \item{in_sample}{A data frame with the in-sample fitted values.}
 #' \item{out_of_sample}{A data frame with the out-of-sample counterfactual predicts,  and the estimated treatment effect
-#' (realization - counterfactual).}
+#' ( = realization - counterfactual).}
 #' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE),
 #'   its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
 #'
