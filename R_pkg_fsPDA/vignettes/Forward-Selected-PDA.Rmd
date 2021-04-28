@@ -14,7 +14,7 @@ geometry: margin=1in
 bibliography: REFERENCES.bib
 biblio-style: apalike
 link-citations: yes
-fontsize: 12pt
+fontsize: 11pt
 urlcolor: blue
 header-includes:
 - \usepackage{graphics}
@@ -23,9 +23,6 @@ header-includes:
 - \usepackage{setspace}
 - \singlespacing
 ---  
-  
-  
----
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -34,78 +31,88 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(fsPDA)
-```
+## Introduction
 
 
+Program evaluation is an important economemtric topic. 
+@hsiao2012panel's *panel data approach* (PDA) is one of the leading methods for program evaluation.
+To extend PDA to big data environments, 
+@shi2019forward ([arXiv: 1908.05894](https://arxiv.org/abs/1908.05894)) propose the *forward-selected panel data approach* (fsPDA)
+which uses the forward selection algorithm to select a small number
+of control units, and then employ these selected units to estimates and conduct inference for the average treatment effect (ATE).
 
-#### Description
 
-Function implementing forward-selected panel data approach in @shi2019forward.
+Forward selection is a well-known greedy variable selection method 
+[@hastie2009bible]. After forward selection, fsPDA suggest 
+using the selected control units to run OLS, predicting the counterfactual,
+and calculating the standard *t*-statistic for hypothesis testing.
 
-#### Installation
 
+@shi2019forward bring forth the procedure and establish its asymptotic guarantee. 
+This document introduces the R package `fsPDA` ([https://github.com/zhentaoshi/fsPDA](https://github.com/zhentaoshi/fsPDA))
+which automates the procedure.
+
+
+## Usage
+To install the R package, run
 ```{r, eval=FALSE}
 devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")
 ```
 
-#### Usage
-
+The package is documented with complete help files for all functions and datasets. 
+The work horse function is `est.fsPDA`:
 ```{r, eval=FALSE}
+est.fsPDA <- function(treated, control, treatment_start, date = NULL, lrvar_lag = NULL) 
+```
+The arguments of the function are
+
+*  `treated`: A $T$-dimensional time series vector of the treated unit.
+*  `control`: A $T\times N$ panel matrix with each column being a control unit.
+*  `treatment_start`: An integer specifying the period treatment starts. 
+*  `date`:  A $T$-dimensional vector of date class or any meaningful numerical sequence. The  default setting `NULL` uses all time observations `1:length(treated)`.
+* `lrvar_lag`: A non-negative integer for the maximum lag with the Bartlett kernel for the Newey-West long-run variance estimator. The default choice `NULL` specifies `floor((length(treated)-treatment_start+1)^(1/4))`.
+
+This function returns an objected of the class `fsPDA` with following components:
+
+* `select`: The number and the identities of selected units when the forward selection is terminated by the modified Bayesian information criterion.
+* `in_sample`: In-sample fitting before the treatment data. 
+* `out_of_sample`: Out-of-sample counterfactual prediction and the time-varying treate effect after the treatment data. 
+* `ATE`: The estimated ATE, the corresponding long-run variance, *t*-statistic for the test of zero ATE, and the associated p-value.
+
+To help visualize the raw data, fitted value and the counterfactual prediction, we also provide a `plot` method for the class `fsPDA`. See the help file of `plot.fsPDA` for its usage.
+
+
+## Datasets
+
+The package contains two datasets. `china_import` is the China's luxury watch import 
+in the empirical application of Section 5 of @shi2019forward. 
+`HCW` is original dataset from in @hsiao2012panel. 
+These two datasets are employed to demonstrate the usage of the package.
+
+
+## Applications
+
+First, we replicate the study of China's luxury watch import. 
+
+```{r}
 library(fsPDA)
 data("china_import")
 
-treated = china_import$treated
-control = china_import$control
 intervention_time = china_import$intervention_time
 
-result=est.fsPDA(treated, control,
+result=est.fsPDA(treated = china_import$treated, 
+            control = china_import$control,
             treatment_start = which(names(treated) == intervention_time),
-            date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
+            date = as.Date(paste(substr(names(treated),1,4), "-", 
+            substr(names(treated), 5, 6), "-01", sep="")))
+
+print(result$ATE)
 ```
 
-#### Arguments
+And we plot the graph.
 
-| Argument          |                                                              |
-| :---------------- | ------------------------------------------------------------ |
-| `treated`         | Numeric. A $T$-dimensional time series vector of treated units. |
-| `control`         | Numeric. A $T\times N$ panel matrix with each column being a control unit. |
-| `treatment_start` | An integer specifying the period treatment starts. Should set to lie between $T/2$ and $T$ to ensure enough pre-treatment observations. |
-| `date`            | Date or numeric. A $T$-dimensional vector of date class or any meaningful numerical sequence. By default, if set to be `NULL`, `1:length(treated)` is used. |
-| `lrvar_lag`       | A non-negative integer specifying the maximum lag with Bartlett kernel for the Newey-West long-run variance estimator. By default, if set to be `NULL`, `floor((length(treated)-treatment_start+1)^(1/4))` is used. Cannot set to be larger than `floor(sqrt(length(treated)-treatment_start+1))`. |
-| `plot`            | Logical. Should a `ggplot` object be included in the return list and printed? If set to be `TRUE`, `ggplot2` package is needed as dependency. |
-
-#### Value
-
-| Return          |                                                              |
-| --------------- | ------------------------------------------------------------ |
-| `select`        | A list containing feature selection results, where `dim` is the number of selected units, `control` is the vector indicates the selected units, `coef` contains the coefficient estimates, and `RSquared` is the in-sample $R^2$. |
-| `in_sample`     | A data frame with in-sample fitted values.                   |
-| `out_of_sample` | A data frame with out-of-sample counterfactual predicts and treatment effect estimates. |
-| `ATE`           | A numeric vector containing estimate of average treatment effect (ATE), its long-run variance, t-statistic, and p-value to test if ATE is statistically 0. |
-| `plot`          | A `ggplot` object. Some post-plot arguments of `ggplot` can be added additionally, for example, `labs`. |
-
-
-https://github.com/zhentaoshi/fsPDA
-
-#### Examples
-
-```{r, eval=FALSE}
-library(fsPDA)
-library(ggplot2)
-
-data("china_import")
-
-treated = china_import$treated
-control = china_import$control
-intervention_time = china_import$intervention_time
-
-result=est.fsPDA(treated, control,
-             treatment_start = which(names(treated) == intervention_time),
-             date = as.Date(paste(substr(names(treated),1,4), "-", substr(names(treated), 5, 6), "-01", sep="")))
-
-# print(result$plot+labs(x="Year",y="Monthly Growth Rate"))
+```{r}
+plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
 ```
 
 
