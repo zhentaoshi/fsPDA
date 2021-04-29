@@ -5,7 +5,19 @@ This repo hosts the companion documents, functions and replication files for
 
 **Contributors**: Jingyi Huang, Zhan Gao, Zhentao Shi, Yishu Wang
 
-**Status**: Replication files are complete. The R package is under construction and documentation.
+**Status**: Replication files are complete. The R package is released with version v1.0.1.
+
+---
+
+
+## R Package
+
+The folder`R_pkg_fsPDA` contains an R package. 
+
+* To install the package, run `devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")`.
+
+* Click here for [Package documents](https://github.com/zhentaoshi/fsPDA/blob/master/R_pkg_fsPDA/doc/).
+
 
 ---
 
@@ -24,6 +36,8 @@ This repo hosts the companion documents, functions and replication files for
 
 
 
+
+
 ## Simulations
 
 Under the folder `simulation`: 
@@ -31,12 +45,3 @@ Under the folder `simulation`:
 - Folder `nonsparse` includes code for simulation of non-sparse DGP, in which running `Run.simulation.dense.R` gives the simulation results. 
 - Folder `sparse` includes code for simulation of sparse DGP, in which running `sparse_iid.R`, `sparse_inid.R` and `sparse_nnd.R` gives the simulation results. 
 
-
-
-## R Package
-
-The folder`R_pkg_fsPDA` contains an R package. 
-
-* To install the package, run `devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")`.
-
-* Click here for [Package documents](https://github.com/zhentaoshi/fsPDA/blob/master/R_pkg_fsPDA/doc/).
