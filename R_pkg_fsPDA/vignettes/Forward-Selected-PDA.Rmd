@@ -76,7 +76,7 @@ This function returns an objected of the class `fsPDA` with the following compon
 
 * `select`: The number and the identities of the selected units when the forward selection is terminated by the modified Bayesian information criterion (BIC).
 * `in_sample`: In-sample fitting before the treatment date. 
-* `out_of_sample`: Out-of-sample counterfactual prediction and the time-varying treate effect after the treatment date. 
+* `out_of_sample`: Out-of-sample counterfactual prediction and the time-varying treatment effect after the treatment date. 
 * `ATE`: The estimated ATE, the corresponding (long-run) standard error, *t*-statistic for the test of zero ATE, and the associated p-value.
 
 To help visualize the raw data, the fitted values and the counterfactual predictions,

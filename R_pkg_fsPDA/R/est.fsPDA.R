@@ -174,8 +174,9 @@ est.fsPDA <- function(treated, control, treatment_start, date = NULL, lrvar_lag 
   } else {
     lrvar_d <- var(d_hat)
   }
+  lrse_ATE <- sqrt(lrvar_d / T2)
 
-  Z <- ATE / sqrt(lrvar_d / T2)
+  Z <- ATE / lrse_ATE
   p_value <- 2 * (1 - pnorm(abs(Z)))
 
 
@@ -190,7 +191,7 @@ est.fsPDA <- function(treated, control, treatment_start, date = NULL, lrvar_lag 
     select = list(dim = R, control = select, coef = beta_hat, RSquared = RSquared),
     in_sample = data.frame(date = date[1:T1], observation = y1, fit = y1_hat),
     out_of_sample = data.frame(date = date[(T1 + 1):Tn], observation = y2, counterfactual = y2_0, treatment = d_hat),
-    ATE = c(ATE = ATE, sd = lrvar_d, t_stat = Z, p_value = p_value)
+    ATE = c(ATE = ATE, se = lrse_ATE, t_stat = Z, p_value = p_value)
   )
   class(result) <- "fsPDA"
 
