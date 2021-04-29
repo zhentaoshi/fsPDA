@@ -37,4 +37,6 @@ Under the folder `simulation`:
 
 The folder`R_pkg_fsPDA` contains an R package. 
 
-To install the package,run `devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")`.
+* To install the package, run `devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")`.
+
+* Click here for [Package documents](https://github.com/zhentaoshi/fsPDA/blob/master/R_pkg_fsPDA/doc/).
