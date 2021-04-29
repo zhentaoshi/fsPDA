@@ -5,7 +5,7 @@ Version: 1.0.0
 Authors@R: c(
     person("Zhentao", "Shi",  role = c("aut", "cre"), email = "shizhentao@gmail.com" ), 
 	person("Jingyi", "Huang", role = c("aut"), email = "huangjy0912@gmail.com"),
-	person("Yishu", "Wang", role = c("aut", "cre"), email = "wangy@link.cuhk.edu.hk"),
+	person("Yishu", "Wang", role = c("aut"), email = "wangy@link.cuhk.edu.hk"),
 	person("Zhan", "Gao", role = c("aut"), email = "gaozhan.cuhk@gmail.com ")
 	)
 Maintainer: Zhentao Shi <shizhentao@gmail.com>
