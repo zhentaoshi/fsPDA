@@ -16,7 +16,7 @@ est.fsPDA(treated, control, treatment_start, date = NULL, lrvar_lag = NULL)
 \item{date}{Date or numeric. A T-by-1 vector of date class or any meaningful numerical sequence.
 The default option \code{NULL} means \code{1:length(treated)} is used.}
 
-\item{lrvar_lag}{A non-negative integer specifying the maximum lag with Bartlett kernel
+\item{lrvar_lag}{A non-negative integer specifying the maximum lag with the Bartlett kernel
 for the Newey-West long-run variance estimator.
 The default option \code{NULL} specifies \code{floor((length(treated)-treatment_start+1)^(1/4))}.
 The admissible maximum is \code{floor(sqrt(length(treated)-treatment_start+1))}.}

@@ -1,5 +1,5 @@
 ---
-title: "fsPDA: An R Package"
+title: "fsPDA: R Package"
 author: "Zhentao Shi and Yishu Wang"
 date: \today
 output:
@@ -39,18 +39,17 @@ Program evaluation is an important economemtric topic.
 To extend PDA to big data environments, 
 @shi2019forward ([arXiv: 1908.05894](https://arxiv.org/abs/1908.05894)) propose the *forward-selected panel data approach* (fsPDA)
 which uses the forward selection algorithm to select a small number
-of control units, and then employ these selected units to estimates and conduct inference for the average treatment effect (ATE).
-
-
+of control units.
 Forward selection is a well-known greedy variable selection method 
-[@hastie2009bible]. After forward selection, fsPDA suggest 
-using the selected control units to run OLS, predicting the counterfactual,
-and calculating the standard *t*-statistic for hypothesis testing.
+[@hastie2009bible]. After forward selection, fsPDA uses the selected control units to run OLS, predicting the counterfactual,
+and calculating the standard *t*-statistic for hypothesis testing
+for the average treatment effect (ATE).
+
 
 
 @shi2019forward bring forth the procedure and establish its asymptotic guarantee. 
 This document introduces the R package `fsPDA` ([https://github.com/zhentaoshi/fsPDA](https://github.com/zhentaoshi/fsPDA))
-which automates the procedure.
+which automates the estimation and inference procedure.
 
 
 ## Usage
@@ -62,24 +61,27 @@ devtools::install_github("zhentaoshi/fsPDA/R_pkg_fsPDA")
 The package is documented with complete help files for all functions and datasets. 
 The work horse function is `est.fsPDA`:
 ```{r, eval=FALSE}
-est.fsPDA <- function(treated, control, treatment_start, date = NULL, lrvar_lag = NULL) 
+est.fsPDA <- function(treated, control, treatment_start, 
+                      date = NULL, lrvar_lag = NULL) 
 ```
 The arguments of the function are
 
-*  `treated`: A $T$-dimensional time series vector of the treated unit.
+*  `treated`: A $T$-dimensional vector of time series of the treated unit.
 *  `control`: A $T\times N$ panel matrix with each column being a control unit.
-*  `treatment_start`: An integer specifying the period treatment starts. 
+*  `treatment_start`: An integer specifying the period when the treatment / intervention starts. 
 *  `date`:  A $T$-dimensional vector of date class or any meaningful numerical sequence. The  default setting `NULL` uses all time observations `1:length(treated)`.
 * `lrvar_lag`: A non-negative integer for the maximum lag with the Bartlett kernel for the Newey-West long-run variance estimator. The default choice `NULL` specifies `floor((length(treated)-treatment_start+1)^(1/4))`.
 
-This function returns an objected of the class `fsPDA` with following components:
+This function returns an objected of the class `fsPDA` with the following components:
 
-* `select`: The number and the identities of selected units when the forward selection is terminated by the modified Bayesian information criterion.
-* `in_sample`: In-sample fitting before the treatment data. 
-* `out_of_sample`: Out-of-sample counterfactual prediction and the time-varying treate effect after the treatment data. 
-* `ATE`: The estimated ATE, the corresponding long-run variance, *t*-statistic for the test of zero ATE, and the associated p-value.
+* `select`: The number and the identities of the selected units when the forward selection is terminated by the modified Bayesian information criterion (BIC).
+* `in_sample`: In-sample fitting before the treatment date. 
+* `out_of_sample`: Out-of-sample counterfactual prediction and the time-varying treate effect after the treatment date. 
+* `ATE`: The estimated ATE, the corresponding (long-run) standard error, *t*-statistic for the test of zero ATE, and the associated p-value.
 
-To help visualize the raw data, fitted value and the counterfactual prediction, we also provide a `plot` method for the class `fsPDA`. See the help file of `plot.fsPDA` for its usage.
+To help visualize the raw data, the fitted values and the counterfactual predictions,
+a `plot` method is provided for the class `fsPDA`. 
+See the help file of `plot.fsPDA` about its usage.
 
 
 ## Datasets
@@ -87,7 +89,7 @@ To help visualize the raw data, fitted value and the counterfactual prediction, 
 The package contains two datasets. `china_import` is the China's luxury watch import 
 in the empirical application of Section 5 of @shi2019forward. 
 `HCW` is original dataset from in @hsiao2012panel. 
-These two datasets are employed to demonstrate the usage of the package.
+These two datasets are used to demonstrate the usage of the package.
 
 ## Demonstrations
 
@@ -100,9 +102,9 @@ library(fsPDA)
 data("china_import")
 date_import <- names(china_import$treated)
 
-date_import <- names(china_import$treated)
 result <- est.fsPDA(
-  treated = china_import$treated, control = china_import$control,
+  treated = china_import$treated, 
+  control = china_import$control,
   treatment_start = which(date_import == china_import$intervention_time),
   date = as.Date(paste(substr(date_import, 1, 4), "-", 
                        substr(date_import, 5, 6), "-01", sep = ""))
@@ -117,7 +119,9 @@ A time series graph with a clear legend is provided by the generic `plot` method
 plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
 ```
 
-Next, we apply fsPDA to the `HCW` dataset of 24 countries and territories. 
+Next, we apply fsPDA to the `HCW` dataset of 24 countries and territories to evaluate 
+the effect of the trade treaty on Hong Kong's GDP growth rate.
+
 ```{r}
 data("HCW")
 result <- est.fsPDA(
@@ -137,6 +141,11 @@ estimated counterfactual can is discernible.
 plot(result, tlab = "Year", ylab = "HK GDP Growth Rate")
 ```
 
+## Acknowledgement
+
+Shi acknowledges the financial support from the Hong Kong Research
+Grants Council No.24614817. We thank Jingyi Huang and Zhen Gao for their
+assistance in developing this R package. 
 
 
 
