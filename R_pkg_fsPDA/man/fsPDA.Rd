@@ -5,7 +5,7 @@
 \alias{fsPDA}
 \title{fsPDA: Package for the Forward-Selected Panel Data Approach}
 \description{
-Estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
+Automated estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
 }
 \details{
 \code{est.fsPDA} is the main function. It generates a \code{fsPDA} object which can work with

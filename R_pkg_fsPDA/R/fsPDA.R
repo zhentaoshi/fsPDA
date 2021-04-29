@@ -1,6 +1,6 @@
 #' fsPDA: Package for the Forward-Selected Panel Data Approach
 #'
-#' Estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
+#' Automated estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
 #'
 #' \code{est.fsPDA} is the main function. It generates a \code{fsPDA} object which can work with
 #' the generic method \code{plot}.
@@ -28,7 +28,7 @@ NULL
 #'  \item\strong{Frequency:} {Monthly}
 #'  \item\strong{Date Range:} {2010:Feb -- 2015:Dec}
 #'  \item\code{treated} {Time series of luxury watch import, under the official category
-#'  name "watches with case of, or clad with, precious metal". Names in the format "yyyymm".}
+#'  name "watches with case of, or clad with, precious metal". Names are in the format "yyyymm".}
 #'  \item\code{control} {A matrix of commodities as the control units. The rowname is "yyyymm", and the column name
 #'  is the identity of the commodity.}
 #'  \item\code{intervention_time} {Character. The month when the treatment intervention started, formated in "yyyymm".}
@@ -41,7 +41,7 @@ NULL
 #'
 #' China's monthly import data are unavailable after September of 2012.
 #' To make our data consistent,
-#' we sum the export value of other countries to China and take it as import value before and after September of 2012.
+#' we sum the other countries' export values to China, and take them as import values before and after September of 2012.
 #'
 #' @references
 #'
@@ -56,7 +56,7 @@ NULL
 
 
 
-#' HCW Data
+#' Hsiao, Ching and Wan (2012) Dataset
 #'
 #' This is the real GDP growth rate data used in Hsiao, Ching, and Wan (2012).
 #'
@@ -64,7 +64,7 @@ NULL
 #'
 #' @format
 #' \itemize{
-#'   \item\code{panel} {A matrix of real GDP growth rate of many countries. The column names are the countries and territories.
+#'   \item\code{panel} {A matrix of real GDP growth rate of 25 countries and territories, indicated by the column names.
 #'   The first column is Hong Kong.}
 #'   \item\code{quarter} {Character. A time sequence related to \code{panel} labeled by year and quarter.}
 #'   \item\code{T1} {An Integer indicates the length of pre-treated period.}

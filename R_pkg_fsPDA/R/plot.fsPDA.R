@@ -1,9 +1,9 @@
-#' Plot Raw Data, Fitting and Counterfactual Prediction
+#' Plot Raw Data, Fitting, and Counterfactual Prediction
 #'
-#' Plot method for objects of class "fsPDA".
+#' The generic \code{plot} method for objects of the "fsPDA" class
 #' It draws the observed time series of the treated unit in a red solid line.
 #' It uses the fsPDA method to fit the pre-treatment sample (represented by a green dash line),
-#' and then to predict the counterfactual after the treatment data (represented by a blue dash line).
+#' and then to predict the counterfactual in the post-treatment sample (represented by a blue dash line).
 #'
 #'
 #' @param x An object of the "fsPDA" class.

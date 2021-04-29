@@ -1,4 +1,4 @@
-#' Forward-selected Panel Data Approach
+#' Forward-Selected Panel Data Approach
 #'
 #' Estimation and inference by the forward-selected panel data approach (Shi and Huang, 2021).
 #'
@@ -15,14 +15,14 @@
 #' @return A list of the class "fsPDA" is returned. It contains the following components:
 #' \item{select}{A list containing the selected control units,
 #'   where \code{dim} is the number of selected units,
-#'   \code{control} is the vector indicates the selected units,
+#'   \code{control} stores the identities of the selected units,
 #'   \code{coef} contains the coefficient estimates,
 #'   and \code{RSquared} is the in-sample R-Squared.}
-#' \item{in_sample}{A data frame with the in-sample fitted values.}
-#' \item{out_of_sample}{A data frame with the out-of-sample counterfactual predicts,  and the estimated treatment effect
+#' \item{in_sample}{A data frame of the in-sample fitted values.}
+#' \item{out_of_sample}{A data frame of the out-of-sample counterfactual predictions,  and the estimated treatment effect
 #' ( = realization - counterfactual).}
 #' \item{ATE}{A numeric vector containing estimate of average treatment effect (ATE),
-#'   its long-run variance, t-statistic, and p-value to test if ATE is statistically 0.}
+#'   its long-run standard error, t-statistic, and p-value if the hypothesis testing of zero ATE.}
 #'
 #' @export
 #'
@@ -36,17 +36,21 @@
 #' # Example of China luxury watch import
 #' data("china_import")
 #' date_import <- names(china_import$treated)
-#' result <- est.fsPDA(treated = china_import$treated, control = china_import$control,
+#' result <- est.fsPDA(treated = china_import$treated,
+#'                     control = china_import$control,
 #'                     treatment_start = which(date_import == china_import$intervention_time),
-#'                     date = as.Date(paste(substr(date_import,1,4), "-", substr(date_import, 5, 6), "-01", sep="")))
+#'                     date = as.Date(paste(substr(date_import,1,4), "-",
+#'                         substr(date_import, 5, 6), "-01", sep="")))
 #' print(result)
 #' plot(result, tlab = "Year", ylab = "Monthly Growth Rate")
 #'
 #' # Example of HCW
 #' data("HCW")
-#' result <- est.fsPDA(treated = HCW$panel[,1], control = HCW$panel[,-1],
+#' result <- est.fsPDA(treated = HCW$panel[,1],
+#'                     control = HCW$panel[,-1],
 #'                     treatment_start = HCW$T1+1,
-#'                     date = as.Date(paste(substr(HCW$quarter, 1, 4), "-", (as.numeric(substr(HCW$quarter, 6, 6))-1)*3+1, "-1", sep="")))
+#'                     date = as.Date(paste(substr(HCW$quarter, 1, 4), "-",
+#'                         (as.numeric(substr(HCW$quarter, 6, 6))-1)*3+1, "-1", sep="")))
 #' print(result)
 #' plot(result, tlab = "Year", ylab = "Real GDP Growth Rate")
 #'

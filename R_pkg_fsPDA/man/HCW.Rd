@@ -3,10 +3,10 @@
 \docType{data}
 \name{HCW}
 \alias{HCW}
-\title{HCW Data}
+\title{Hsiao, Ching and Wan (2012) Dataset}
 \format{
 \itemize{
-  \item\code{panel} {A matrix of real GDP growth rate of many countries. The column names are the countries and territories.
+  \item\code{panel} {A matrix of real GDP growth rate of 25 countries and territories, indicated by the column names.
   The first column is Hong Kong.}
   \item\code{quarter} {Character. A time sequence related to \code{panel} labeled by year and quarter.}
   \item\code{T1} {An Integer indicates the length of pre-treated period.}

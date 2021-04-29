@@ -9,7 +9,7 @@
  \item\strong{Frequency:} {Monthly}
  \item\strong{Date Range:} {2010:Feb -- 2015:Dec}
  \item\code{treated} {Time series of luxury watch import, under the official category
- name "watches with case of, or clad with, precious metal". Names in the format "yyyymm".}
+ name "watches with case of, or clad with, precious metal". Names are in the format "yyyymm".}
  \item\code{control} {A matrix of commodities as the control units. The rowname is "yyyymm", and the column name
  is the identity of the commodity.}
  \item\code{intervention_time} {Character. The month when the treatment intervention started, formated in "yyyymm".}
@@ -23,7 +23,7 @@ Pre-treatment: 2010:Feb -- 2012:Dec (35 months). Post-treatment: 2013:Jan -- 201
 
 China's monthly import data are unavailable after September of 2012.
 To make our data consistent,
-we sum the export value of other countries to China and take it as import value before and after September of 2012.
+we sum the other countries' export values to China, and take them as import values before and after September of 2012.
 }
 \usage{
 data(china_import)
