@@ -4,11 +4,10 @@ author: "Zhentao Shi and Yishu Wang"
 date: \today
 output:
   rmarkdown::pdf_document: default
-  '# rmarkdown::html_vignette': default
 vignette: >
   %\VignetteIndexEntry{Forward-Selected Panel Data Approach}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 description: nothing
 geometry: margin=1in
 bibliography: REFERENCES.bib
@@ -30,6 +29,14 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 15cm]{fsPDA_illustrate}
+\caption*{Illustration of fsPDA, by Iris Shi}
+\end{figure}
+
+\newpage
 
 ## Introduction
 
