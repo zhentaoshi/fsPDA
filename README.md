@@ -1,7 +1,7 @@
 # fsPDA
 This repo hosts the companion documents, functions and replication files for 
 
-* Zhentao Shi and Jingyi Huang (2021): "Forward-Selected Panel Data Approach" forthcoming at the *Journal of Econometrics*, [arXiv: 1908.05894](https://arxiv.org/abs/1908.05894)
+* Zhentao Shi and Jingyi Huang (2021): "[Forward-Selected Panel Data Approach for Program Evaluation](https://www.sciencedirect.com/science/article/pii/S0304407621001536?via%3Dihub)," the *Journal of Econometrics*, [arXiv: 1908.05894](https://arxiv.org/abs/1908.05894)
 
 **Contributors**: Jingyi Huang, Zhan Gao, Zhentao Shi, Yishu Wang
 
@@ -32,7 +32,7 @@ The folder`R_pkg_fsPDA` contains an R package.
 
 #### Application 2
 
-`app2_HCW_revist\main.R` replicates the empirical example of Hsiao, Ching and Wan (2012) as in the online supplement of the paper.
+`app2_HCW_revist\main.R` replicates the empirical example of Hsiao, Ching and Wan (2012) as in the [online supplement](https://ars.els-cdn.com/content/image/1-s2.0-S0304407621001536-mmc1.pdf) of the paper.
 
 
 
