@@ -1,7 +1,7 @@
 # fsPDA
 This repo hosts the companion documents, functions and replication files for 
 
-* Zhentao Shi and Jingyi Huang (2021): "[Forward-Selected Panel Data Approach for Program Evaluation](https://www.sciencedirect.com/science/article/pii/S0304407621001536?via%3Dihub)," the *Journal of Econometrics*, [arXiv: 1908.05894](https://arxiv.org/abs/1908.05894)
+* Zhentao Shi and Jingyi Huang (2023): "[Forward-Selected Panel Data Approach for Program Evaluation](https://www.sciencedirect.com/science/article/pii/S0304407621001536?via%3Dihub)," the *Journal of Econometrics*, 234(2), 512-535. [arXiv: 1908.05894](https://arxiv.org/abs/1908.05894)
 
 **Contributors**: Jingyi Huang, Zhan Gao, Zhentao Shi, Yishu Wang
 
