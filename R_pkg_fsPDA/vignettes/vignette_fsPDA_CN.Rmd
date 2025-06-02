@@ -37,12 +37,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-\begin{figure}[h]
-\centering
-\includegraphics[width = 15cm]{fsPDA_illustrate}
-\caption*{Illustration of fsPDA, by Iris Shi}
-\end{figure}
-
 \newpage
 
 ## 前言
